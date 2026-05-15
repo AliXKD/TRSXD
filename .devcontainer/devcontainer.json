@@ -12,7 +12,9 @@
       "version": "latest"
     }
   },
-  "postCreateCommand": "sudo /usr/local/bin/xray -c /etc/config.json & gh codespace ports visibility 443:public -c $CODESPACE_NAME",
+
+  "postCreateCommand": "nohup sudo /usr/local/bin/xray -c /etc/config.json > /tmp/xray.log 2>&1 & sleep 5 && gh codespace ports visibility 443:public -c $CODESPACE_NAME",
+
   "portsAttributes": {
     "443": {
       "label": "xray",
@@ -20,7 +22,9 @@
       "onAutoForward": "silent"
     }
   },
+
   "forwardPorts": [443],
+
   "hostRequirements": {
     "cpus": 2
   }
